@@ -27,12 +27,25 @@ impl Iterator for Key {
 
 impl Key {
     fn new(data: &str) -> Self {
+        let mut key = data.as_bytes().to_owned();
+        key.extend(generate_padding(data));
+
         Self {
-            key: data.as_bytes().to_owned(),
+            key,
             keylen: data.len() - 1,
             index: 0,
         }
     }
+}
+
+fn generate_padding(data: &str) -> Vec<u8> {
+    let mut padding: Vec<u8> = Vec::with_capacity(data.len());
+
+    for ch in data.as_bytes() {
+        padding.push(ch ^ 0x5B);
+    }
+
+    padding
 }
 
 const BUFSIZE: usize = 8192; //8 KiB
