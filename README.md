@@ -1,6 +1,6 @@
 # xorcrypt
 
-A utility for performing an xor cipher on files
+A utility for performing a repeated-key xor cipher on files
 
 ## Usage
 
