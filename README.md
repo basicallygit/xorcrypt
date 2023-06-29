@@ -7,6 +7,7 @@ A utility for performing an xor cipher on files
 ```bash
 xorcrypt <inputfile> <outputfile>
 ```
+Decrypting is the exact same command
 
 ### !!
 XOR ciphers are NOT cryptographically secure, especially not with a 1 letter key <br>
