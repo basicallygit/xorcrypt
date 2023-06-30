@@ -36,6 +36,10 @@ impl Key {
             index: 0,
         }
     }
+
+    fn reset(&mut self) {
+        self.index = 0;
+    }
 }
 
 fn generate_padding(data: &str) -> Vec<u8> {
@@ -131,7 +135,7 @@ mod tests {
             ciphered.push(data[i] ^ key.next().unwrap());
         }
 
-        key = Key::new(text);
+        key.reset();
 
         for i in 0..data.len() {
             deciphered.push(ciphered[i] ^ key.next().unwrap());
