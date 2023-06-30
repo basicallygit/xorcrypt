@@ -113,3 +113,30 @@ fn main() -> ExitCode {
 
     ExitCode::SUCCESS
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn check_integrity() {
+        let text = "Some secret data";
+        let data = text.as_bytes();
+        let mut key = Key::new(text);
+
+        let mut ciphered: Vec<u8> = Vec::with_capacity(data.len());
+        let mut deciphered = ciphered.clone();
+
+        for i in 0..data.len() {
+            ciphered.push(data[i] ^ key.next().unwrap());
+        }
+
+        key = Key::new(text);
+
+        for i in 0..data.len() {
+            deciphered.push(ciphered[i] ^ key.next().unwrap());
+        }
+
+        assert_eq!(text, String::from_utf8_lossy(deciphered.as_slice()));
+    }
+}
