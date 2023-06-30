@@ -137,6 +137,6 @@ mod tests {
             deciphered.push(ciphered[i] ^ key.next().unwrap());
         }
 
-        assert_eq!(text, String::from_utf8_lossy(deciphered.as_slice()));
+        assert_eq!(text, String::from_utf8(deciphered).unwrap());
     }
 }
