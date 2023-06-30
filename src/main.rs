@@ -66,6 +66,11 @@ fn main() -> ExitCode {
     stdout().flush().unwrap();
     stdin().read_line(&mut input).unwrap();
 
+    if input.trim().len() == 0 {
+        eprintln!("No key supplied.");
+        return ExitCode::FAILURE;
+    }
+
     let mut key = Key::new(input.trim());
     let mut file = BufReader::new(match File::open(&argv[1]) {
         Ok(fd) => fd,
